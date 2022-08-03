@@ -32,8 +32,10 @@ module.exports.login = (req, res) => {
 }
 
 module.exports.logout = (req, res) => {
-    req.flash('success', `welcome back ${req.body.username}`)
-    const redirectUrl = (req.session.returnTo || '/campgrounds');
-    delete req.session.returnTo;
-    res.redirect(redirectUrl)
+    req.logout(function(err) {
+        if (err) { return next(err); }
+    req.flash('Logged out')
+    res.redirect('/campgrounds')
+    });
+    
 }

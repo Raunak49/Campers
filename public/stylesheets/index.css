@@ -1,0 +1,11 @@
+.gradient {
+    font-weight: bold;
+    background-image:linear-gradient(0deg, rgb(34 98 195) 0%, rgb(255 0 169) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+body { 
+    background-color: #d2ebff;
+  }

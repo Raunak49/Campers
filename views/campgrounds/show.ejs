@@ -1,14 +1,14 @@
 <% layout('layouts/boilerplate') %> 
-
 <link rel="stylesheet" href="/stylesheets/star.css">
+<style>body { background-color: #f7f7f7; }</style>
 <div class="row">
-  <div class="col-6 ">
-    <div id='map' style='width: 400px; height: 300px;'></div>
+  <div class="col-6">
+    <div class="card mb-3"> 
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="carousel-inner">
         <% c.images.forEach((img,i)  => { %>
           <div class="carousel-item <%= i==0?"active":""%>">
-          <img src="<%= img.url %>" crossorigin="anonymous" class="d-block w-100">
+          <img src="<%= img.url %>" crossorigin="anonymous" class="d-block w-100" height="400" width="600">
         </div>
         <% }) %>
       </div>
@@ -23,8 +23,6 @@
       </button>
       <% } %> 
     </div>
-    </div>
-    <div class="card mb-3" >
       <div class="card-body">
         <h5 class="card-title"><%= c.title %></h5>
         <p class="card-text"><%=c.description%></p>
@@ -33,7 +31,6 @@
         <li class="list-group-item"><%= c.location %></li>
         <li class="list-group-item">Submitted by: <%= c.author.username %></li>
         <li class="list-group-item">₹<%= c.price %>/night</li>
-        <li class="list-group-item">Vestibulum at eros</li>
       </ul>
       <% if(currentUser && c.author.equals(currentUser._id)) {%>  
       <div class="card-body">
@@ -46,10 +43,11 @@
     </div>
   </div>
     <div class="col-6">
+      <div id='map' style='height: 300px;' class="mb-4"></div>
       <% if(currentUser) { %> 
     <h2>Leave a review</h2>
-    <form action="/campgrounds/<%= c._id %>/reviews" method="post" class="mb-3 needs-validation" novalidate>
-      <div class="mb-3">
+    <form action="/campgrounds/<%= c._id %>/reviews" method="post" class="needs-validation" novalidate>
+      <div>
       <fieldset class="starability-slot">
         <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
         <input type="radio" id="first-rate1" name="review[rating]" value="1" />
@@ -90,12 +88,9 @@
     <% } %> 
   </div>
 </div>
-
 <script>
-  
   const token = "<%- process.env.MAPBOX_TOKEN %>";
   const campground = <%-JSON.stringify(c)%>
-  
  </script>
 
 <script src="/javascripts/showPageMap.js"></script>

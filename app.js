@@ -26,8 +26,7 @@ const dbUrl = process.env.db_URL
 
 mongoose.connect(dbUrl ,{
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    
+    useUnifiedTopology: true
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console,"connection error"));
